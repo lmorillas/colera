@@ -5,9 +5,9 @@
     <title>John Snow - Cholera in London</title>
 
 	<!-- Este spreadsheet presenta los datos de John Snow Cholera Pumps and Deaths	 -->
-	<!-- <link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/of4fkbz/public/basic?hl=en_US&alt=json-in-script" ex:converter="googleSpreadsheets">
+	<!-- <link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/of4fkbz/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">
 
-<link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/opxs9o4/public/basic?hl=en_US&alt=json-in-script" ex:converter="googleSpreadsheets">		-->
+<link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/opxs9o4/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">		-->
 <link rel="exhibit/data" type="application/jsonp" href="//spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/okfwumr/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">
 
 
@@ -144,12 +144,11 @@ function mymap(mapDiv) {
     ]},
         ];
 
-         var map = new google.maps.Map(
-            mapDiv  );
-         map = new google.maps.Map(mapDiv, {
+         var map = new google.maps.Map(mapDiv, {
           center: {lat: 51.513249, lng: -0.136859},
           zoom: 15,
-          styles: styles
+          styles: styles,
+          mapTypeId: google.maps.MapTypeId.TERRAIN,
         });
 
 
@@ -163,6 +162,25 @@ function mymap(mapDiv) {
 <body>
 	<h2 align="center">John Snow - Cólera en Londres, 1854</h2>	 
     <div id="content">
+
+    <div id="title-panel">
+           <table width="25%">
+           <tr><td><b> Buscar: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b>
+             <div data-ex-role="facet" data-ex-facet-class="TextSearch"></div></td>
+           </tr>
+           </table>
+    </div>
+    
+    <div id="top-panels">
+        <table width="100%">
+        <tr>
+            <td width="6%"><div data-ex-role="facet" data-ex-expression=".label" data-ex-facet-label="Bomba No."></div></td>
+            <td width="6%"><div data-ex-role="facet" data-ex-expression=".Deaths" data-ex-facet-label="Muertes"></div></td>
+        </tr>
+        </table>
+        </div>
+        
+    <div id="exhibit-control-panel" data-ex-role="viewpanel"></div>
     
 	<!-- 
 		Label siempre es el nombre en la burbuja del Timeline,  Verde es 00FF66, 7CFC00, morado 660033, amarillo claro FFFFE0
@@ -173,10 +191,47 @@ function mymap(mapDiv) {
                         data-ex-view-class="Map"
                         data-ex-map-constructor="mymap"
                         data-ex-latlng=".Geolatlon" 
-                        
+                        data-ex-role="exhibit-view" 
+                        data-ex-viewclass="Map" 
+                        data-ex-label="Map"
+                        data-ex-latlng=".Geolatlon" 
+                        data-ex-center="51.513249,-0.136859" 
+                        data-ex-zoom="15" 
+                        data-ex-maxautozoom="15" 
+                        data-ex-size="large" 
+                        data-ex-color="#ffc878" 
+                        data-ex-color-key=".label"
+                        data-ex-showToolbox="false" 
+                        data-ex-color-coder="colores"
+                        data-ex-mapheight="450" 
+                        data-ex-bubble-width="300" 
+                        data-ex-bubble-height="250" 
+                        data-ex-shape-height="13" 
+                        data-ex-shape-width="11" 
+                        data-ex-type="terrain" 
+                        data-ex-densityfactor="1"> 
+                                            
                         >
                     </div>
 
+
+ <div data-ex-role="coder" data-ex-coder-class="Color" id="colores" style="display: none;">
+        <span data-ex-color="#00B2EE">_Little Marlborough & Carnaby</span>
+        <span data-ex-color="#00B2EE">_Broad & Cambridge</span>
+        <span data-ex-color="#00B2EE">_Marlborough Mews</span>
+        <span data-ex-color="#00B2EE">_Berners & Oxford</span>
+        <span data-ex-color="#00B2EE">_Newman & Oxford</span>
+        <span data-ex-color="#00B2EE">_Castle St. East & Adam & Eve Ct</span>
+        <span data-ex-color="#00B2EE">_Castle St. East & Market Place</span>
+        <span data-ex-color="#00B2EE">_Bridle & Brewer</span>
+        <span data-ex-color="#00B2EE">_Warwick & Leicester</span>
+        <span data-ex-color="#00B2EE">_Tichborne & Picadilly</span>
+        <span data-ex-color="#00B2EE">_Rupert & Archer</span>
+        <span data-ex-color="#00B2EE">_King & Macclesfield</span>
+        <span data-ex-color="#00B2EE">_Vigo & Saville</span>
+        <span data-ex-case="others" data-ex-color="#ffc878">Otros</span>
+        <span data-ex-color="#e60000">_Caso 72</span>
+    </div>
 
     </div>
 </body>
