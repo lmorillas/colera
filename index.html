@@ -2,24 +2,31 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>John Snow - Cholera in London</title>
+    <title>John Snow - Cólera en Londres</title>
 
 	<!-- Este spreadsheet presenta los datos de John Snow Cholera Pumps and Deaths	 -->
-	<!-- <link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/of4fkbz/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">
-
-<link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/opxs9o4/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">		-->
-<link rel="exhibit/data" type="application/jsonp" href="//spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/okfwumr/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">
+<link rel="exhibit/data" type="application/jsonp" href="https://spreadsheets.google.com/feeds/list/1Xms4sY_DZjVpoVgTO1nhu1sMIsBdg-8jsT6LGO-etng/okfwumr/public/basic?hl=en_US&alt=json-in-script" data-ex-converter="googleSpreadsheets">
 
 
 	<!-- Cerebro Periférico SDS Cia. Ltda.
 		Quito-Ecuador
 		Mapas según Courtenay parks para ver Terrain
+    <script src="http://api.simile-widgets.org/exhibit/3.1.2rc2/extensions/map/map-extension.js" data-ex-apikey="AIzaSyCDO3EXWKJms5T38db48czFJZDunhYIzn8" >
 	 -->
-    <script src="//api.simile-widgets.org/exhibit/HEAD/exhibit-api.js"></script>
+    <script src="http://api.simile-widgets.org/exhibit/HEAD/exhibit-api.js"></script>
 	<!-- <script src="http://api.simile-widgets.org/exhibit/3.1.2rc2/extensions/time/time-extension.js" type="text/javascript"></script> -->
-    <link rel="exhibit-extension" href="//api.simile-widgets.org/exhibit/HEAD/extensions/map/map-extension.js" data-ex-apikey="AIzaSyCDO3EXWKJms5T38db48czFJZDunhYIzn8" >
+    <script src="http://api.simile-widgets.org/exhibit/HEAD/extensions/map/map-extension.js"></script>
 
-    
+    <script type="text/javascript">
+        var zebraStyler = function(item, database, tr) {
+        if (tr.rowIndex % 2) {
+        tr.style.background = '#eee';
+         } else {
+         tr.style.background = '#ccc';
+         }
+         }
+    </script>
+
     <style>
         body {
             font-family:    Tahoma, Arial, sans serif;
@@ -86,86 +93,191 @@
             text-align: center;
         }
     </style>
-	<!-- Historical Map Overlay
+
 <script type="text/javascript">
     var map;
-    var oldMapViewReconstruct = Exhibit.MapView.prototype._reconstruct;
-    Exhibit.MapView.prototype._reconstruct = function() {
-        oldMapViewReconstruct.call(this);
-        map = this._map;
-        var imageBounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(51.516623, -0.137835),
-            new google.maps.LatLng(51.509991, -0.134098));
-
-        historicalOverlay = new google.maps.GroundOverlay(
-            'https://www.cerebroperiferico.com/Colera/london.png',
-            imageBounds);
-        historicalOverlay.setMap(map);
-    }
-</script>
-		-->
-
-	<!-- Otro intento por ocultar las etiquetas en Google Maps
-http://maps.google.com/maps/api/staticmap?sensor=false&size=800x800&center=51.513249,-0.136859&zoom=15&style=feature:all|element:labels|visibility:off
-http://maps.google.com/maps/api/staticmap?sensor=false&size=512x512&center=London&zoom=15&style=feature:all|element:labels|visibility:off
-		-->
-
-<script type="text/javascript">
-
 function mymap(mapDiv) {
     var styles = [
-          {
-            featureType: 'poi',
-            stylers: [{visibility: 'off'}]
-          },
-          {
-            featureType: 'transit',
-            stylers: [{visibility: 'off'}]
-          },
-          {
-            featureType: "landscape",
-            elementType: "labels",
-            stylers: [
-                                 { visibility: "off" }]
-                             },
-                             {
-    featureType: "administrative",
-    elementType: "labels",
-    stylers: [
-      { visibility: "off" }
-    ]
+            {elementType: 'geometry',
+    stylers: [{'color': '#ebe3cd'}]
   },
-
+    {
+    elementType: 'labels.icon',
+    stylers: [{'visibility': 'off'}]
+  },
+    {
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#523735'}]
+  },
+    {
+    elementType: 'labels.text.stroke',
+    stylers: [{'color': '#f5f1e6'}]
+  },
+    {
+    featureType: 'administrative',
+    elementType: 'geometry.stroke',
+    stylers: [{'color': '#c9b2a6'}]
+  },
   {
-    featureType: "road",
-    elementType: "labels",
-    stylers: [
-      { visibility: "off" }
-    ]},
-        ];
+    featureType: 'administrative.land_parcel',
+    elementType: 'geometry.stroke',
+    stylers: [{'color': '#dcd2be'}]
+  },
+  {
+    featureType: 'administrative.land_parcel',
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#ae9e90'}]
+  },
+  {
+    featureType: 'landscape.natural',
+    elementType: 'geometry',
+    stylers: [{'color': '#dfd2ae'}]
+  },
+    {
+    featureType: 'poi',
+    elementType: 'geometry',
+    stylers: [{'color': '#dfd2ae'}]
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#93817c'}]
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'geometry.fill',
+    stylers: [{'color': '#a5b076'}]
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#447530'}]
+  },
+    {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [{'color': '#f5f1e6'}]
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'geometry',
+    stylers: [{'color': '#fdfcf8'}]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [{'color': '#f8c967'}]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
+    stylers: [{'color': '#e9bc62'}]
+  },
+  {
+    featureType: 'road.highway.controlled_access',
+    elementType: 'geometry',
+    stylers: [{'color': '#e98d58'}]
+  },
+  {
+    featureType: 'road.highway.controlled_access',
+    elementType: 'geometry.stroke',
+    stylers: [{'color': '#db8555'}]
+  },
+  {
+    featureType: 'road.local',
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#806b63'}]
+  },
+    {
+    featureType: 'transit.line',
+    elementType: 'geometry',
+    stylers: [{'color': '#dfd2ae'}]
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#8f7d77'}]
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'labels.text.stroke',
+    stylers: [{'color': '#ebe3cd'}]
+  },
+  {
+    featureType: 'transit.station',
+    elementType: 'geometry',
+    stylers: [{'color': '#dfd2ae'}]
+  },
+    {
+    featureType: 'water',
+    elementType: 'geometry.fill',
+    stylers: [{'color': '#b9d3c2'}]
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [{'color': '#92998d'}]
+  },
+  ];
 
-         var map = new google.maps.Map(mapDiv, {
-          center: {lat: 51.513249, lng: -0.136859},
-          zoom: 15,
-          styles: styles,
-          mapTypeId: google.maps.MapTypeId.TERRAIN,
+        map = new google.maps.Map(mapDiv, {
+         center: {lat: 51.51242601910761, lng: -0.1323665068542912},
+         zoom: 15,
+         styles: styles,
+         mapTypeId: google.maps.MapTypeId.TERRAIN,
+       });
+
+       var imageBounds = {
+        north: 51.51685,
+        south: 51.5091,
+        east: -0.130925,
+        west: -0.1438
+      };
+
+      historicalOverlay = new google.maps.GroundOverlay(
+          'http://www.cerebroperiferico.com/projects/colera/historic_overlay_london.png',
+          imageBounds);
+      historicalOverlay.setMap(map);
+
+      var script = document.createElement('script');
+
+        script.src = 'circle_mag.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+        map.data.setStyle(function(feature) {
+          var magnitude = feature.getProperty('mag');
+          return {
+            icon: getCircle(magnitude)
+          };
         });
 
+      return map;
+   }
 
-        return map;
-    }
+   function getCircle(magnitude) {
+    return {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor: 'red',
+      fillOpacity: .2,
+      scale: Math.pow(2, magnitude) / 2,
+      strokeColor: 'white',
+      strokeWeight: .5
+    };
+  }
 
-    
-    </script>
+  function eqfeed_callback(results) {
+    map.data.addGeoJson(results);
+  }
+
+   </script>
 </head> 
 
 <body>
 	<h2 align="center">John Snow - Cólera en Londres, 1854</h2>	 
     <div id="content">
-
     <div id="title-panel">
-           <table width="25%">
-           <tr><td><b> Buscar: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b>
+	       <table width="25%">
+	       <tr><td><b> Buscar: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b>
              <div data-ex-role="facet" data-ex-facet-class="TextSearch"></div></td>
            </tr>
            </table>
@@ -174,65 +286,158 @@ function mymap(mapDiv) {
     <div id="top-panels">
         <table width="100%">
         <tr>
-            <td width="6%"><div data-ex-role="facet" data-ex-expression=".label" data-ex-facet-label="Bomba No."></div></td>
-            <td width="6%"><div data-ex-role="facet" data-ex-expression=".Deaths" data-ex-facet-label="Muertes"></div></td>
+            	<!-- 	--><td width="6%"><div data-ex-role="facet" data-ex-expression=".label" data-ex-facet-label="Bomba y Caso"></div></td>
+            <td width="4%"><div data-ex-role="facet" data-ex-expression=".Category" data-ex-facet-label="Categoría"></div></td>
+            <td width="6%"><div data-ex-role="facet" data-ex-expression=".Deaths" data-ex-facet-label="No. de hogares y no. de muertes"></div></td>
+            <td width="6%"><div data-ex-role="facet" data-ex-expression=".Deaths_rounded" data-ex-facet-label="No. de hogares, no. de muertes agrupadas y bombas"></div></td>
+            <td width="6%"><div data-ex-role="facet" data-ex-expression=".Pump_nearby" data-ex-facet-label="No. de hogares y bomba más cercana"></div></td>
         </tr>
         </table>
         </div>
         
     <div id="exhibit-control-panel" data-ex-role="viewpanel"></div>
-    
 	<!-- 
 		Label siempre es el nombre en la burbuja del Timeline,  Verde es 00FF66, 7CFC00, morado 660033, amarillo claro FFFFE0
 		"normal", "satellite", "hybrid", "terrain"
+        Este mapa sustituye el que está comentado abajo, al final. Aparte de normal, satellite, hybrid, terrain, genera uno personalizado: data-ex-map-constructor="mymap"
 	-->
-
- <div data-ex-role="view"
+<div  data-ex-role="exhibit-view" 
                         data-ex-view-class="Map"
                         data-ex-map-constructor="mymap"
+                        data-ex-label="Mapa"
                         data-ex-latlng=".Geolatlon" 
-                        data-ex-role="exhibit-view" 
-                        data-ex-viewclass="Map" 
-                        data-ex-label="Map"
-                        data-ex-latlng=".Geolatlon" 
-                        data-ex-center="51.513249,-0.136859" 
+                        data-ex-center="51.51242601910761,-0.1323665068542912" 
                         data-ex-zoom="15" 
                         data-ex-maxautozoom="15" 
                         data-ex-size="large" 
                         data-ex-color="#ffc878" 
-                        data-ex-color-key=".label"
-                        data-ex-showToolbox="false" 
+                        data-ex-color-key=".Deaths_rounded"
                         data-ex-color-coder="colores"
-                        data-ex-mapheight="450" 
+                        data-ex-mapheight="550" 
                         data-ex-bubble-width="300" 
                         data-ex-bubble-height="250" 
                         data-ex-shape-height="13" 
                         data-ex-shape-width="11" 
                         data-ex-type="terrain" 
-                        data-ex-densityfactor="1"> 
-                                            
-                        >
+                        data-ex-densityfactor="1"
+                        data-ex-showToolbox="false"> 
                     </div>
 
-
  <div data-ex-role="coder" data-ex-coder-class="Color" id="colores" style="display: none;">
-        <span data-ex-color="#00B2EE">_Little Marlborough & Carnaby</span>
-        <span data-ex-color="#00B2EE">_Broad & Cambridge</span>
-        <span data-ex-color="#00B2EE">_Marlborough Mews</span>
-        <span data-ex-color="#00B2EE">_Berners & Oxford</span>
-        <span data-ex-color="#00B2EE">_Newman & Oxford</span>
-        <span data-ex-color="#00B2EE">_Castle St. East & Adam & Eve Ct</span>
-        <span data-ex-color="#00B2EE">_Castle St. East & Market Place</span>
-        <span data-ex-color="#00B2EE">_Bridle & Brewer</span>
-        <span data-ex-color="#00B2EE">_Warwick & Leicester</span>
-        <span data-ex-color="#00B2EE">_Tichborne & Picadilly</span>
-        <span data-ex-color="#00B2EE">_Rupert & Archer</span>
-        <span data-ex-color="#00B2EE">_King & Macclesfield</span>
-        <span data-ex-color="#00B2EE">_Vigo & Saville</span>
-        <span data-ex-case="others" data-ex-color="#ffc878">Otros</span>
-        <span data-ex-color="#e60000">_Caso 72</span>
-    </div>
+        <span data-ex-color="#00B2EE">Little Marlborough & Carnaby</span>
+        <span data-ex-color="#00B2EE">Broad & Cambridge</span>
+        <span data-ex-color="#00B2EE">Marlborough Mews</span>
+        <span data-ex-color="#00B2EE">Berners & Oxford</span>
+        <span data-ex-color="#00B2EE">Newman & Oxford</span>
+        <span data-ex-color="#00B2EE">Castle St. East & Adam & Eve Ct</span>
+        <span data-ex-color="#00B2EE">Castle St. East & Market Place</span>
+        <span data-ex-color="#00B2EE">Bridle & Brewer</span>
+        <span data-ex-color="#00B2EE">Warwick & Leicester</span>
+        <span data-ex-color="#00B2EE">Tichborne & Picadilly</span>
+        <span data-ex-color="#00B2EE">Rupert & Archer</span>
+        <span data-ex-color="#00B2EE">King & Macclesfield</span>
+        <span data-ex-color="#00B2EE">Vigo & Saville</span>
+        <span data-ex-color="#000000">15 muertes</span>
+        <span data-ex-color="#7C0A02">7-8 muertes</span>
+        <span data-ex-color="#ff0800">4-5 muertes</span>
+		<span data-ex-color="#ffa500">2-3 muertes</span>
+		<span data-ex-color="#f8f8ff">1 muerte</span>
+	</div>
+    <p align="center">136 hogares (de 250) tuvieron una sola muerte).  Los pines azules representan las 13 bombas de agua de palanca.  El pin negro registra un hogar con 15 muertes. Pines rojo oscuro representan hogares con más de 4 muertes. Pines rojos representan hogares con más de 4 muertes. Pines crema representan hogares con menos de tres muertes.<br/>12 bombas se pueden descartar por simple inspección. Solamente una bomba presenta alta mortalidad en todas sus calles de afluencia (Norte, Sur, Este y Oeste).</p>
+        <!-- Query
+    	 -->       	 
+    <div data-ex-role="viewPanel">
+        <table data-ex-role="lens" class="documento" style="display: none;">
+        <tr width="60%">
+            <td width="30%">
+            <div class="izq">Bomba y Caso<span data-ex-content=".label"></span></div>
+            </td>
 
+            <tr>
+            <td width="10%" style="background-color: #fbd4b4;"><div><b>Muertes</b></td>
+            <td width="90%">
+                <div><span data-ex-content=".Deaths"></span></div>
+            </td>
+            </tr>
+
+        <!-- Por lo pronto no usaré imagen ni descarga
+            <td width="90%">
+                <div><img ex:src-content=".ImageURL" /> [<a ex:href-content=".Url" class="name" target="new" >Download</a>]</div>
+        	</td>
+            <tr>
+            <td width="10%"><b>Survey</b></td>
+            <td width="90%">
+                <div>Satisfaction: <span ex:content=".Satisfaction_answer"></span><br/>
+                	 Quality: <span ex:content=".Quality_answer"></span></div>
+        	</td>
+            </tr>
+-->
+    	 </tr>
+        </table>
+
+         <!-- data-ex-role="viewPanel" means contents visible
+              data-ex-role="view" means selected
+              data-ex-role="exhibit-view" means closed
+    	 -->
+        <div data-ex-role="view"
+            data-ex-label="Muertes"
+            data-ex-viewClass="Tile"
+            data-ex-showAll="false"
+            data-ex-orders=".label, .Deaths"
+            data-ex-possibleOrders=".label, .Deaths"
+            data-ex-showToolbox="false">
+            </div>
+
+	<!--  Table   -->
+		
+<div data-ex-role="view" 
+    data-ex-label="Tabla" 
+    data-ex-rowstyler="zebraStyler" 
+    data-ex-viewclass="Exhibit.TabularView" 
+    data-ex-columns=".label, .Deaths" 
+    data-ex-columnlabels="label, Deaths" 
+    data-ex-sortascending="true"
+    data-ex-showToolbox="false"> 
+</div>
+
+         <!-- Timeline
+
+        <div ex:role="view"
+            ex:viewClass="Timeline"
+            ex:label="Timeline"
+            ex:start=".Start"
+            ex:end=".End"
+            ex:topBandUnit="month"
+   			ex:bottomBandUnit="year"
+   			ex:topBandPixelsPerUnit="250"
+            ex:colorKey=".Brand"
+            ex:bubbleWidth="150"
+            ex:bubbleHeight="150"
+            ex:showToolbox="false">
+            <div ex:role="exhibit-lens" class="documento-timeline-lens" style="display: none;">
+                <img ex:src-content=".imageURL" />
+                <div><b>Medical query: </b><span ex:content=".Inquiry"></span><br/>
+                	<b>Keywords: </b><span ex:content=".Keywords" class="discipline"></span><br/>
+                	<b>Brand: </b><span ex:content=".Brand" class="discipline"></span><br/>
+                	<b>City: </b><span ex:content=".City_physician" class="discipline"></span><br/>
+                	<b>Requested by: </b><span ex:content=".Requested_by" class="discipline"></span><br/>
+                	<b>Requested on: </b><span ex:content=".Timestamp_received" class="discipline"></span><br/>
+                	<b>Answered on: </b><span ex:content=".Timestamp_sent" class="discipline"></span><br/>
+                	<b>Response sent via: </b><span ex:content=".Response_sent_via" class="discipline"></span>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <!--
+        <div data-ex-role="view"
+             data-ex-view-class="Map"
+             data-ex-map-constructor="mymap"
+             data-ex-latlng=".Geolatlon">
+        </div>
+        -->
     </div>
+    </div>
+</div>
 </body>
 </html>
